@@ -1,7 +1,7 @@
 ---
-title: "My Final Project Template"
-author: Your name here
-subtitle: Subtitle here if desired
+title: "Eating Off Campus"
+author: Nirmiti Pandit
+subtitle: Mapping food access across higher education institutions in Erie County
 date: today
 date-format: long
 ---
@@ -11,6 +11,14 @@ date-format: long
 \[\~ 200 words\]
 
 Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way. Include figures if you like.
+
+This project seeks to visualize food access across higher education institutions in Erie County, NY by assessing their overall food environment. Using the five dimensions of food access, also known as the ***5A's of food environment***, this interactive R project will provide an overview of
+
+- _availability and accessibility_, which captures the geographical ease with which individuals can access food retailers;
+- _affordability_, which captures objective and subjective measures of cost; and
+- _acceptability and accommodation_, which reflect perceptions and cultural norms related to the food environment in Erie County and the Western New York (WNY) region.
+
+By creating an interactive web page for spatial analysis, this project utilizes the user-friendly R-language to present the current food landscape through the lens of students in higher education, an often-overlooked demographic in local health and nutrition policies.
 
 # Materials and methods
 

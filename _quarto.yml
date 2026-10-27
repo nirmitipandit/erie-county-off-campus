@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "GEO511_FinalProject"
+  title: "Eating Off Campus"
   navbar:
     left:
       - href: index.qmd
