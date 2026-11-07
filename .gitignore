@@ -8,3 +8,5 @@ _site
 /.quarto/
 styles*
 widgets
+
+**/*.quarto_ipynb

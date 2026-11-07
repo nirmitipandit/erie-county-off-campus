@@ -1,9 +1,31 @@
 ---
-title: "About"
+title: "About this site"
 ---
 
-About this site
+This interactive dashboard contains information about food access for higher educational institutions in Erie County, NY.
 
-```{r}
-1 + 1
-```
+## Higher Education Institutions in Erie County
+
+{{< include _includes/_institutions.md >}}
+
+## Data Sources
+
+NYSED Higher Education Institution Directory\
+[**NYSED Erie County profile**](https://data.nysed.gov/profile.php?county=14)\
+*New York State Education Department*
+
+The institution list is extracted from the higher education institutions section of NYSED's Erie County profile. Institutions listed in the separate closed institutions section are excluded. The extraction is run separately in RStudio. This webpage displays the saved Markdown table; rendering the website does not refresh the institution list.
+
+Geography: Erie County, New York
+
+[**dataset 1**](https://westchester-covid.mattherman.info/about.html)\
+*Matt Herman*
+
+sample description: This dataset includes the number of tests and positive cases of Covid-19 in New York State. The data is reported by county. It is updated daily and includes all tests reported by the end of the prior day.Tests include those administered by clinical laboratories as well as pooled or batch tests reported by colleges and universities.
+
+Most recent data: **Mar 7, 2023**\
+Geographic aggregation: **County (New York State only)**
+
+
+
+

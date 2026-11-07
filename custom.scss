@@ -1,0 +1,58 @@
+/*-- scss:defaults --*/
+
+// Page colors
+
+$body-bg: #fffaf2;
+$body-color: #2d3430;
+$primary: #285943;
+$link-color: #a84420;
+
+// Fonts
+$font-family-sans-serif: Arial, sans-serif;
+$headings-font-family: Georgia, serif;
+$headings-color: #285943;
+$font-size-base: 1.05rem;
+
+// Navigation bar
+$navbar-bg: #285943;
+$navbar-fg: #ffffff;
+$navbar-hl: #ffd08a;
+
+/*-- scss:rules --*/
+
+// Main page title
+h1.title {
+  color: $primary;
+  border-bottom: 3px solid #e89b45;
+  padding-bottom: 0.5rem;
+}
+
+// Section headings
+h2 {
+  margin-top: 2rem;
+}
+
+// Body text spacing
+p {
+  line-height: 1.75;
+}
+
+// Website title in the navigation bar
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+// Links in the main content
+main a {
+  text-underline-offset: 3px;
+}
+
+main a:hover {
+  color: #743016;
+}
+
+// Rounded images in the main content
+main img {
+  border-radius: 10px;
+}

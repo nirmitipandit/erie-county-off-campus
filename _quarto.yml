@@ -5,12 +5,15 @@ website:
   title: "Eating Off Campus"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: "Home"
+        href: index.qmd
+      - text: "About"
+        href: about.qmd
 
 format:
   html:
-    theme: cosmo
+    theme:
+      - cosmo
+      - custom.scss
     includes:
         after_body: include/after_body.html
