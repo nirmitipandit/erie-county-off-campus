@@ -1,4 +1,4 @@
-| Insitution | County |
+| Institution | County |
 | :--- | :--- |
 | BRYANT & STRATTON COLLEGE - AMHERST | Erie |
 | BRYANT & STRATTON COLLEGE - BUFFALO | Erie |
@@ -16,7 +16,7 @@
 
 Source: [NYSED Erie County profile](https://data.nysed.gov/profile.php?county=14).
 
-Retrieved: 2026-11-07 (UTC).
+NYSED list retrieved: 2026-11-07 (UTC).
 
 Institutions listed in NYSED's separate closed institutions section are excluded.
 
