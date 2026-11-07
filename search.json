@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Eating Off Campus",
+    "section": "",
+    "text": "[~ 200 words]\nClearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way. Include figures if you like.\nThis project seeks to visualize food access across higher education institutions in Erie County, NY by assessing their overall food environment. Using the five dimensions of food access, also known as the 5A’s of food environment, this interactive R project will provide an overview of\n\navailability and accessibility, which captures the geographical ease with which individuals can access food retailers;\naffordability, which captures objective and subjective measures of cost; and\nacceptability and accommodation, which reflect perceptions and cultural norms related to the food environment in Erie County and the Western New York (WNY) region.\n\nBy creating an interactive web page for spatial analysis, this project utilizes the user-friendly R-language to present the current food landscape through the lens of students in higher education, an often-overlooked demographic in local health and nutrition policies."
+  },
+  {
+    "objectID": "index.html#download-and-clean-all-required-data",
+    "href": "index.html#download-and-clean-all-required-data",
+    "title": "Eating Off Campus",
+    "section": "Download and clean all required data",
+    "text": "Download and clean all required data\n\nn=20\ndata=data.frame(x=runif(n,-180,180),\n                y=runif(n,-60,60),\n                size = runif(n, 5, 20),\n                category = factor(\n                  sample(letters[1:5], n, replace = TRUE)\n                  ),\n                value = rnorm(n))\n\ndata %&gt;% \n  slice(1:10) %&gt;% #show only 1:n rows\n  kable(digits=2,align=\"c\")%&gt;% #make table and round to two digits\n  kable_styling(bootstrap_options = \n                  c(\"striped\", \"hover\", \"condensed\", \"responsive\")) #apply other formatting\n\n\n\n\nx\ny\nsize\ncategory\nvalue\n\n\n\n\n-104.86\n44.91\n10.85\na\n-0.65\n\n\n-156.22\n-19.08\n12.04\ne\n-1.48\n\n\n176.19\n-47.43\n16.31\na\n0.48\n\n\n-143.88\n10.52\n19.12\ne\n-0.40\n\n\n64.43\n11.66\n10.92\nd\n1.52\n\n\n-93.70\n18.06\n9.52\nc\n0.69\n\n\n51.81\n25.28\n7.94\nc\n-0.13\n\n\n-31.06\n59.32\n8.75\nd\n2.69\n\n\n32.62\n40.10\n7.79\na\n0.05\n\n\n-93.47\n5.21\n8.64\nc\n-1.23\n\n\n\n\nAdd any additional processing steps here."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About this site",
+    "section": "",
+    "text": "This interactive dashboard contains information about food access for higher educational institutions in Erie County, NY."
+  },
+  {
+    "objectID": "about.html#higher-education-institutions-in-erie-county",
+    "href": "about.html#higher-education-institutions-in-erie-county",
+    "title": "About this site",
+    "section": "Higher Education Institutions in Erie County",
+    "text": "Higher Education Institutions in Erie County\n\n\n\nInsitution\nCounty\n\n\n\n\nBRYANT & STRATTON COLLEGE - AMHERST\nErie\n\n\nBRYANT & STRATTON COLLEGE - BUFFALO\nErie\n\n\nBRYANT & STRATTON COLLEGE - SOUTHTOW\nErie\n\n\nBUFFALO STATE UNIVERSITY\nErie\n\n\nCANISIUS UNIVERSITY OF BUFFALO, NY\nErie\n\n\nD’YOUVILLE UNIVERSITY\nErie\n\n\nDAEMEN UNIVERSITY\nErie\n\n\nERIE COMM COLLEGE-CITY CAMPUS\nErie\n\n\nHILBERT COLLEGE\nErie\n\n\nSISTERS CHARITY HOSP SCH OF NURSING\nErie\n\n\nSUNY BUFFALO\nErie\n\n\nTROCAIRE COLLEGE\nErie\n\n\nVILLA MARIA COLLEGE OF BUFFALO\nErie\n\n\n\nSource: NYSED Erie County profile.\nRetrieved: 2026-11-07 (UTC).\nInstitutions listed in NYSED’s separate closed institutions section are excluded."
+  },
+  {
+    "objectID": "about.html#data-sources",
+    "href": "about.html#data-sources",
+    "title": "About this site",
+    "section": "Data Sources",
+    "text": "Data Sources\nNYSED Higher Education Institution Directory\nNYSED Erie County profile\nNew York State Education Department\nThe institution list is extracted from the higher education institutions section of NYSED’s Erie County profile. Institutions listed in the separate closed institutions section are excluded. The extraction is run separately in RStudio. This webpage displays the saved Markdown table; rendering the website does not refresh the institution list.\nGeography: Erie County, New York\ndataset 1\nMatt Herman\nsample description: This dataset includes the number of tests and positive cases of Covid-19 in New York State. The data is reported by county. It is updated daily and includes all tests reported by the end of the prior day.Tests include those administered by clinical laboratories as well as pooled or batch tests reported by colleges and universities.\nMost recent data: Mar 7, 2023\nGeographic aggregation: County (New York State only)"
+  },
+  {
+    "objectID": "data/Readme.html",
+    "href": "data/Readme.html",
+    "title": "Data Folder",
+    "section": "",
+    "text": "Data Folder\nPlace any data needed by your analysis in this folder. Please do not store large files here. Then read in any data using the ‘data’ path. For example, read_csv(\"data/data.csv\")."
+  }
+]
