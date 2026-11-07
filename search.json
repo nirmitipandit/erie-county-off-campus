@@ -1,19 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Eating Off Campus",
-    "section": "",
-    "text": "[~ 200 words]\nClearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way. Include figures if you like.\nThis project seeks to visualize food access across higher education institutions in Erie County, NY by assessing their overall food environment. Using the five dimensions of food access, also known as the 5A’s of food environment, this interactive R project will provide an overview of\n\navailability and accessibility, which captures the geographical ease with which individuals can access food retailers;\naffordability, which captures objective and subjective measures of cost; and\nacceptability and accommodation, which reflect perceptions and cultural norms related to the food environment in Erie County and the Western New York (WNY) region.\n\nBy creating an interactive web page for spatial analysis, this project utilizes the user-friendly R-language to present the current food landscape through the lens of students in higher education, an often-overlooked demographic in local health and nutrition policies."
-  },
-  {
-    "objectID": "index.html#download-and-clean-all-required-data",
-    "href": "index.html#download-and-clean-all-required-data",
-    "title": "Eating Off Campus",
-    "section": "Download and clean all required data",
-    "text": "Download and clean all required data\n\nn=20\ndata=data.frame(x=runif(n,-180,180),\n                y=runif(n,-60,60),\n                size = runif(n, 5, 20),\n                category = factor(\n                  sample(letters[1:5], n, replace = TRUE)\n                  ),\n                value = rnorm(n))\n\ndata %&gt;% \n  slice(1:10) %&gt;% #show only 1:n rows\n  kable(digits=2,align=\"c\")%&gt;% #make table and round to two digits\n  kable_styling(bootstrap_options = \n                  c(\"striped\", \"hover\", \"condensed\", \"responsive\")) #apply other formatting\n\n\n\n\nx\ny\nsize\ncategory\nvalue\n\n\n\n\n-104.86\n44.91\n10.85\na\n-0.65\n\n\n-156.22\n-19.08\n12.04\ne\n-1.48\n\n\n176.19\n-47.43\n16.31\na\n0.48\n\n\n-143.88\n10.52\n19.12\ne\n-0.40\n\n\n64.43\n11.66\n10.92\nd\n1.52\n\n\n-93.70\n18.06\n9.52\nc\n0.69\n\n\n51.81\n25.28\n7.94\nc\n-0.13\n\n\n-31.06\n59.32\n8.75\nd\n2.69\n\n\n32.62\n40.10\n7.79\na\n0.05\n\n\n-93.47\n5.21\n8.64\nc\n-1.23\n\n\n\n\nAdd any additional processing steps here."
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About this site",
@@ -25,14 +11,28 @@
     "href": "about.html#higher-education-institutions-in-erie-county",
     "title": "About this site",
     "section": "Higher Education Institutions in Erie County",
-    "text": "Higher Education Institutions in Erie County\n\n\n\nInsitution\nCounty\n\n\n\n\nBRYANT & STRATTON COLLEGE - AMHERST\nErie\n\n\nBRYANT & STRATTON COLLEGE - BUFFALO\nErie\n\n\nBRYANT & STRATTON COLLEGE - SOUTHTOW\nErie\n\n\nBUFFALO STATE UNIVERSITY\nErie\n\n\nCANISIUS UNIVERSITY OF BUFFALO, NY\nErie\n\n\nD’YOUVILLE UNIVERSITY\nErie\n\n\nDAEMEN UNIVERSITY\nErie\n\n\nERIE COMM COLLEGE-CITY CAMPUS\nErie\n\n\nHILBERT COLLEGE\nErie\n\n\nSISTERS CHARITY HOSP SCH OF NURSING\nErie\n\n\nSUNY BUFFALO\nErie\n\n\nTROCAIRE COLLEGE\nErie\n\n\nVILLA MARIA COLLEGE OF BUFFALO\nErie\n\n\n\nSource: NYSED Erie County profile.\nRetrieved: 2026-11-07 (UTC).\nInstitutions listed in NYSED’s separate closed institutions section are excluded."
+    "text": "Higher Education Institutions in Erie County\n\n\n\nInstitution\nCounty\n\n\n\n\nBRYANT & STRATTON COLLEGE - AMHERST\nErie\n\n\nBRYANT & STRATTON COLLEGE - BUFFALO\nErie\n\n\nBRYANT & STRATTON COLLEGE - SOUTHTOW\nErie\n\n\nBUFFALO STATE UNIVERSITY\nErie\n\n\nCANISIUS UNIVERSITY OF BUFFALO, NY\nErie\n\n\nD’YOUVILLE UNIVERSITY\nErie\n\n\nDAEMEN UNIVERSITY\nErie\n\n\nERIE COMM COLLEGE-CITY CAMPUS\nErie\n\n\nHILBERT COLLEGE\nErie\n\n\nSISTERS CHARITY HOSP SCH OF NURSING\nErie\n\n\nSUNY BUFFALO\nErie\n\n\nTROCAIRE COLLEGE\nErie\n\n\nVILLA MARIA COLLEGE OF BUFFALO\nErie\n\n\n\nSource: NYSED Erie County profile.\nNYSED list retrieved: 2026-11-07 (UTC).\nInstitutions listed in NYSED’s separate closed institutions section are excluded."
   },
   {
     "objectID": "about.html#data-sources",
     "href": "about.html#data-sources",
     "title": "About this site",
     "section": "Data Sources",
-    "text": "Data Sources\nNYSED Higher Education Institution Directory\nNYSED Erie County profile\nNew York State Education Department\nThe institution list is extracted from the higher education institutions section of NYSED’s Erie County profile. Institutions listed in the separate closed institutions section are excluded. The extraction is run separately in RStudio. This webpage displays the saved Markdown table; rendering the website does not refresh the institution list.\nGeography: Erie County, New York\ndataset 1\nMatt Herman\nsample description: This dataset includes the number of tests and positive cases of Covid-19 in New York State. The data is reported by county. It is updated daily and includes all tests reported by the end of the prior day.Tests include those administered by clinical laboratories as well as pooled or batch tests reported by colleges and universities.\nMost recent data: Mar 7, 2023\nGeographic aggregation: County (New York State only)"
+    "text": "Data Sources\nNYSED Higher Education Institution Directory\nNYSED Erie County profile\nNew York State Education Department\nThe institution list is extracted from the higher education institutions section of NYSED’s Erie County profile. Institutions listed in the separate closed institutions section are excluded. The extraction is run separately in RStudio. This webpage displays the saved Markdown table; rendering the website does not refresh the institution list.\nGeography: Erie County, New York"
+  },
+  {
+    "objectID": "about.html#readings",
+    "href": "about.html#readings",
+    "title": "About this site",
+    "section": "Readings",
+    "text": "Readings\n\nFood deserts exposure, density of fast-food restaurants, and park access: Exploring the association of food and recreation environments with obesity and diabetes using global and local regression models\nThe 5 A’s Approach for Contextual Assessment of Food Environment\nIntermittent food deserts. Exploring the spatiotemporal dimension of the urban fresh food access in Chilean cities\nA method for estimating physical and economic food access at high spatial resolution\nFood Insecurity in Higher Education: A Contemporary Review of Impacts and Explorations of Solutions"
+  },
+  {
+    "objectID": "about.html#inspiring-r-projects",
+    "href": "about.html#inspiring-r-projects",
+    "title": "About this site",
+    "section": "Inspiring R-projects",
+    "text": "Inspiring R-projects\n\nNot Mustard – Exploring McDonalds Reviews on Yelp with R\nWestchester Covid-19 Tracking\nExploring House Price Estimation And Imagining A Better Real Estate Website"
   },
   {
     "objectID": "data/Readme.html",
@@ -40,5 +40,26 @@
     "title": "Data Folder",
     "section": "",
     "text": "Data Folder\nPlace any data needed by your analysis in this folder. Please do not store large files here. Then read in any data using the ‘data’ path. For example, read_csv(\"data/data.csv\")."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Eating Off Campus",
+    "section": "",
+    "text": "This project seeks to visualize food access across higher education institutions in Erie County, NY by assessing their overall food environment. Using the five dimensions of food access, also known as the 5A’s of food environment, this interactive R project will provide an overview of\n\navailability and accessibility, which captures the geographical ease with which individuals can access food retailers;\naffordability, which captures objective and subjective measures of cost; and\nacceptability and accommodation, which reflect perceptions and cultural norms related to the food environment in Erie County and the Western New York (WNY) region.\n\nBy creating an interactive web page for spatial analysis, this project utilizes the user-friendly R-language to present the current food landscape through the lens of students in higher education, an often-overlooked demographic in local health and nutrition policies.\n\n\nAs of 2024, 12.5% of Erie County residents face food insecurity, with approximately 63% of those residents falling below the threshold to be SNAP-eligible. An increase of 1.1% since 2019, the county is experiencing an annual food budget shortfall of approximately $92 million, leading to a significant increase in food prices and taxes on food and beverages. Research indicates that although food insecurity across all demographics is an increasing concern and must be understood at an individual level, broad categorizations of these groups increase invisibility of already vulnerable populations. For instance, in 2020, 19 – 56% of students reported being food insecure on college campuses, four times more than the national average, and their prevalence depending on campus location and related factors.\nDemographic selection is not the only variable that lacks comprehensive analysis. Studies show that existing research trends surrounding food and nutritional access often overlook all five dimensions from context-specific methodologies. This dearth in frame of reference, when handpicking only few aspects of the food environment as the central theses, leads to further disparities in how we evaluate the perceptions of healthy, nutritious food available to individuals in a community."
+  },
+  {
+    "objectID": "index.html#why-understand-food-access-for-college-students",
+    "href": "index.html#why-understand-food-access-for-college-students",
+    "title": "Eating Off Campus",
+    "section": "",
+    "text": "As of 2024, 12.5% of Erie County residents face food insecurity, with approximately 63% of those residents falling below the threshold to be SNAP-eligible. An increase of 1.1% since 2019, the county is experiencing an annual food budget shortfall of approximately $92 million, leading to a significant increase in food prices and taxes on food and beverages. Research indicates that although food insecurity across all demographics is an increasing concern and must be understood at an individual level, broad categorizations of these groups increase invisibility of already vulnerable populations. For instance, in 2020, 19 – 56% of students reported being food insecure on college campuses, four times more than the national average, and their prevalence depending on campus location and related factors.\nDemographic selection is not the only variable that lacks comprehensive analysis. Studies show that existing research trends surrounding food and nutritional access often overlook all five dimensions from context-specific methodologies. This dearth in frame of reference, when handpicking only few aspects of the food environment as the central theses, leads to further disparities in how we evaluate the perceptions of healthy, nutritious food available to individuals in a community."
+  },
+  {
+    "objectID": "index.html#download-and-clean-all-required-data",
+    "href": "index.html#download-and-clean-all-required-data",
+    "title": "Eating Off Campus",
+    "section": "Download and clean all required data",
+    "text": "Download and clean all required data\n\n\n\nInstitution\nAddress\nSource\n\n\n\n\nBRYANT & STRATTON COLLEGE - AMHERST\n3650 Millersport Highway, Getzville, NY 14068\nOfficial institution website\n\n\nBRYANT & STRATTON COLLEGE - BUFFALO\n110 Broadway, Buffalo, NY 14203\nOfficial institution website\n\n\nBRYANT & STRATTON COLLEGE - SOUTHTOW\n180 Redtail Road, Orchard Park, NY 14127\nOfficial institution website\n\n\nBUFFALO STATE UNIVERSITY\n1300 Elmwood Avenue, Buffalo, NY 14222\nOfficial institution website\n\n\nCANISIUS UNIVERSITY OF BUFFALO, NY\n2001 Main Street, Buffalo, NY 14208-1098\nOfficial institution website\n\n\nD’YOUVILLE UNIVERSITY\n320 Porter Avenue, Buffalo, NY 14201\nOfficial institution website\n\n\nDAEMEN UNIVERSITY\n4380 Main Street, Amherst, NY 14226\nOfficial institution website\n\n\nERIE COMM COLLEGE-CITY CAMPUS\n121 Ellicott Street, Buffalo, NY 14203\nOfficial institution website\n\n\nHILBERT COLLEGE\n5200 South Park Avenue, Hamburg, NY 14075\nOfficial institution website\n\n\nSISTERS CHARITY HOSP SCH OF NURSING\n2157 Main Street, Buffalo, NY 14214\nProject-author verified\n\n\nSUNY BUFFALO\n190 Founders Promenade, Getzville, NY 14068\nProject-author verified\n\n\nTROCAIRE COLLEGE\n360 Choate Avenue, Buffalo, NY 14220\nOfficial institution website\n\n\nVILLA MARIA COLLEGE OF BUFFALO\n240 Pine Ridge Road, Buffalo, NY 14225\nOfficial institution website\n\n\n\nInstitution list: NYSED Erie County profile.\nNYSED list retrieved and table generated: 2026-11-07 (UTC).\nAddresses are supplemental records maintained in extract_institutions.r. Source links identify the associated official websites. These websites are not automatically scraped for updated addresses during this workflow.\nThe Sisters Charity Hospital School of Nursing entry uses the Sisters of Charity Hospital address: 2157 Main Street, Buffalo, NY 14214. The SUNY Buffalo entry uses 190 Founders Promenade, Getzville, NY 14068. Both locations were independently verified and selected by the project author.\nOpenStreetMap was not queried in this workflow because the live requests were timing out. No OSM feature matches are claimed.\n\nn=20\ndata=data.frame(x=runif(n,-180,180),\n                y=runif(n,-60,60),\n                size = runif(n, 5, 20),\n                category = factor(\n                  sample(letters[1:5], n, replace = TRUE)\n                  ),\n                value = rnorm(n))\n\ndata %&gt;% \n  slice(1:10) %&gt;% #show only 1:n rows\n  kable(digits=2,align=\"c\")%&gt;% #make table and round to two digits\n  kable_styling(bootstrap_options = \n                  c(\"striped\", \"hover\", \"condensed\", \"responsive\")) #apply other formatting\n\n\n\n\nx\ny\nsize\ncategory\nvalue\n\n\n\n\n49.81\n57.19\n14.23\ne\n-0.08\n\n\n-47.40\n5.62\n7.50\ne\n-1.65\n\n\n114.29\n-48.80\n11.81\nc\n-1.87\n\n\n41.18\n-35.28\n14.17\ne\n0.10\n\n\n118.31\n-22.02\n15.45\na\n0.37\n\n\n105.22\n18.86\n9.96\nd\n-0.50\n\n\n32.72\n-15.53\n10.98\nd\n-0.42\n\n\n14.06\n-30.52\n8.00\nb\n1.38\n\n\n147.29\n-55.68\n10.20\ne\n0.26\n\n\n78.12\n4.33\n7.04\nd\n-0.90\n\n\n\n\nAdd any additional processing steps here."
   }
 ]
