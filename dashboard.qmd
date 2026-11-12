@@ -1,0 +1,169 @@
+---
+title: "Food Access Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    social: menu
+    source: embed
+    engine: knitr
+    
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+This interactive dashboard displays results of the food access examination for thirteen higher educational institutions in Erie County. Click the toggle below for quick access or keep scrolling for a full view of the results.
+
+::: {.callout-note collapse="true" icon=false title="Quick Access to Results"}
+
+* [Retailer density & distance from institutions](dashboard.qmd#map-density-distance)
+* [Number of retailers accepting SNAP/EBT or other voucher programs](dashboard.qmd#dygraph-vouchers)
+* [Average store operating hours throughout the week](dashboard.qmd#plot-storehours)
+* [Customer feedback & score of available retailers](dashboard.qmd#valuebox-feedback)
+
+:::
+
+### Retailer density and distance from institutions. {#map-density-distance}
+
+```{r}
+#| label: institution-map
+#| title: "Institution map"
+#| echo: false
+#| warning: false
+#| message: false
+#| padding: 0px
+
+library(leaflet)
+
+institutions <- read.csv(
+  "data/processed/eriecounty_institutions_geocoded.csv",
+  stringsAsFactors = FALSE,
+  fileEncoding = "UTF-8"
+)
+
+institutions <- institutions[
+  is.finite(institutions$latitude) &
+    is.finite(institutions$longitude),
+]
+
+if (nrow(institutions) == 0L) {
+  stop("No usable coordinates found. Run geocode_institutions.r first.")
+}
+
+leaflet(institutions) |>
+  addTiles() |>
+  addMarkers(
+    lng = ~longitude,
+    lat = ~latitude,
+    label = ~institution,
+    popup = ~paste0(
+      "<strong>",
+      htmltools::htmlEscape(institution),
+      "</strong><br>",
+      htmltools::htmlEscape(address)
+    )
+  ) |>
+  fitBounds(
+    lng1 = min(institutions$longitude) - 0.01,
+    lat1 = min(institutions$latitude) - 0.01,
+    lng2 = max(institutions$longitude) + 0.01,
+    lat2 = max(institutions$latitude) + 0.01
+  )
+```
+
+***
+This *placeholder* map shows the number of retailers around higher education institutions. Additionally, it also displays the distance between an institution and a retailer based on the parameters you set.
+
+### Number of retailers accepting SNAP/EBT or other voucher programs. {#dygraph-vouchers}
+
+```{r}
+library(dygraphs)
+lungDeaths <- cbind(mdeaths, fdeaths)
+dygraph(lungDeaths, main = "Deaths from Lung Diseases in the UK") %>%
+  dySeries("mdeaths", label = "Male") %>%
+  dySeries("fdeaths", label = "Female") %>%
+  dyOptions(stackedGraph = TRUE) %>%
+  dyRangeSelector(height = 20) %>% 
+  dyRangeSelector()
+```
+
+***
+This *placeholder* graph shows the affordability of retailers over time by displaying the number of retailers who accept SNAP/EBT or other food voucher programs. Adjust the slider to see in-depth information according to your preference.
+
+
+### Average store operating hours throughout the week. {#plot-storehours}
+
+```{r}
+library(plotly)
+p <- ggplot(data = diamonds, aes(x = cut, fill = clarity)) +
+            geom_bar(position = "dodge")
+ggplotly(p)
+```
+
+***
+This *placeholder* graph shows you the average operating hours of store throughout the week. Zoom in to see additional details and answer questions like "how many stores are open on a Sunday?" or "how many stores are operational near SUNY Buffalo State v.s. Canisius College?"
+
+### Customer feedback and food access score(s). {#valuebox-feedback}
+
+```{r}
+#| echo: false
+#| eval: true
+#| include: true
+#| output: asis
+
+# Placeholder scores:
+# 5 = extremely high food access
+# 1 = extremely low food access
+scores <- c(5, 4, 3, 4, 5, 2, 4, 3, 5, 4)
+
+average_score <- mean(scores)
+review_count <- length(scores)
+
+popup_message <- sprintf(
+  paste0(
+    "Recommendation score: %.1f / 5\n",
+    "Based on %d placeholder reviews.\n\n",
+    "5 = extremely high food access\n",
+    "1 = extremely low food access"
+  ),
+  average_score,
+  review_count
+)
+
+# Safely format the message for an HTML button.
+js_message <- as.character(
+  jsonlite::toJSON(popup_message, auto_unbox = TRUE)
+)
+
+cat(
+  '<button type="button" class="btn btn-primary" onclick="alert(',
+  htmltools::htmlEscape(js_message, attribute = TRUE),
+  ')">Show average food access score</button>',
+  sep = ""
+)
+```
+
+***
+This *placeholder* scorecard consolidates the food access data examined in this dashboard into an average scoring index, presented from ranges\ 
+1 = extremely low food access to\
+5 = extremely high food access\
+
+Click the button to view the placeholder result.
+
+***
+**Hear what other people have to say!**
+
+```{=html}
+<iframe
+ src= "https://www.yelp.com/"
+ width="100%"
+ height="600px"
+ style="border: 1px solide #ddd; border-radius: 4px;">
+
+</iframe>
+```

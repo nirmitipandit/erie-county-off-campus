@@ -22,82 +22,63 @@ By creating an interactive web page for spatial analysis, this project utilizes 
 
 Demographic selection is not the only variable that lacks comprehensive analysis. [Studies show that existing research trends surrounding food and nutritional access often overlook all five dimensions from context-specific methodologies](https://doi.org/10.1016/j.neb.2022.02.017). This dearth in frame of reference, when handpicking only few aspects of the food environment as the central theses, leads to further disparities in how we evaluate the perceptions of healthy, nutritious food available to individuals in a community.
 
-# Materials and methods
+## Whose food access are we looking at?
 
-\[\~ 200 words\]
+```{r}
+#| label: institution-map
+#| title: "Institution map"
+#| echo: false
+#| warning: false
+#| message: false
+#| padding: 0px
 
-Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
-
-Code: The code associated with the project is well organized and easy to follow. Demonstrates mastery of R graphics and functions.
-
-Data: The underlying data are publicly accessible via the web and downloaded/accessed within the Rmd script. If you want to use your own data, you must make it available on a website (e.g. Figshare) so that others are able to re-run your code.
-
-Load any required packages in a code chunk (you may need to install some packages):
-
-```{r, message=F, warning=F}
-library(tidyverse)
 library(leaflet)
-library(kableExtra)
-library(htmlwidgets)
-library(widgetframe)
-knitr::opts_chunk$set(widgetframe_widgets_dir = 'widgets' ) 
-knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
+
+institutions <- read.csv(
+  "data/processed/eriecounty_institutions_geocoded.csv",
+  stringsAsFactors = FALSE,
+  fileEncoding = "UTF-8"
+)
+
+institutions <- institutions[
+  is.finite(institutions$latitude) &
+    is.finite(institutions$longitude),
+]
+
+if (nrow(institutions) == 0L) {
+  stop("No usable coordinates found. Run geocode_institutions.r first.")
+}
+
+leaflet(institutions) |>
+  addTiles() |>
+  addMarkers(
+    lng = ~longitude,
+    lat = ~latitude,
+    label = ~institution,
+    popup = ~paste0(
+      "<strong>",
+      htmltools::htmlEscape(institution),
+      "</strong><br>",
+      htmltools::htmlEscape(address)
+    )
+  ) |>
+  fitBounds(
+    lng1 = min(institutions$longitude) - 0.01,
+    lat1 = min(institutions$latitude) - 0.01,
+    lng2 = max(institutions$longitude) + 0.01,
+    lat2 = max(institutions$latitude) + 0.01
+  )
 ```
 
-## Download and clean all required data
+::: {.callout-tip title="Explore the food access dashboard" appearance="default"}
+[Click here to learn more about how Erie County's higher institutions perform within the five dimensions of the food environment!](dashboard.qmd)
 
-{{< include _includes/_institution_addresses.md >}}
+Please note that the institution list is not exhaustive and may contain incomplete/missing data.
 
-```{r, message=FALSE, warning=FALSE}
-n=20
-data=data.frame(x=runif(n,-180,180),
-                y=runif(n,-60,60),
-                size = runif(n, 5, 20),
-                category = factor(
-                  sample(letters[1:5], n, replace = TRUE)
-                  ),
-                value = rnorm(n))
-```
+Data discrepancy example: SUNY Buffalo has three campuses across Erie County county, with numerous smaller institutions that partially functions as an educational organization. However, NYSED data only highlights the main North campus as the reference point for displaying institutional information. 
 
-```{r, results='asis'}
-data %>% 
-  slice(1:10) %>% #show only 1:n rows
-  kable(digits=2,align="c")%>% #make table and round to two digits
-  kable_styling(bootstrap_options = 
-                  c("striped", "hover", "condensed", "responsive")) #apply other formatting
-```
-
-Add any additional processing steps here.
-
-# Results
-
-\[\~200 words\]
-
-Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author looked at the data in many different ways before coming to the final presentation of the data.
-
-Show tables, plots, etc. and describe them.
-
-```{r, fig.width=6, fig.height=3, fig.cap="Map of completely random data"}
-m <- leaflet(data) %>% 
-  addTiles() %>% 
-  addCircleMarkers(~x, ~y, radius = ~size,color = ~as.factor(category)) %>% 
-  addPopups(~x[2], ~y[2], "Random popup")
-m  # a map with the default OSM tile layer
-```
-
-```{r}
-data %>% 
-  ggplot(aes(x=x,y=y,col=category))+
-  geom_point()
-```
-
-### Dygraphs Example
-
-```{r}
-library(dygraphs)
-dygraph(nhtemp, main = "New Haven Temperatures") |> 
-  dyRangeSelector(dateWindow = c("1920-01-01", "1960-01-01")) 
-```
+See [Next Steps](about.qmd#future-research-author-note) for further insights on future methodological and data processing steps for this project.
+:::
 
 # Conclusions
 
