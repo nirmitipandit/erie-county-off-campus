@@ -20,7 +20,7 @@ Thank you!
 
 {{< include _includes/_institution_addresses.md >}}
 
-## Materials and methods
+## Materials & methods
 
 \[\~ 200 words\]
 
@@ -71,6 +71,7 @@ data %>%
                   c("striped", "hover", "condensed", "responsive")) #apply other formatting
 ```
 
+## More Information
 ::: {.callout-note collapse="true" icon=false}
 ## Readings
 

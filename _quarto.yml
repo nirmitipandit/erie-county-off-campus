@@ -3,12 +3,17 @@ project:
 
 website:
   title: "Eating Off Campus"
+
+  back-to-top-navigation: true
+
   navbar:
     left:
       - text: "Home"
         href: index.qmd
+
       - text: "Food Access Dashboard"
         href: dashboard.qmd
+
       - text: "About"
         href: about.qmd
 
@@ -17,5 +22,10 @@ format:
     theme:
       - cosmo
       - custom.scss
-    includes:
-        after_body: include/after_body.html
+
+    toc: true
+    toc-title: "On this page"
+    toc-location: right
+    toc-depth: 3
+
+    anchor-sections: true
