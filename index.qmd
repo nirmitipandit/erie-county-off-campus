@@ -16,7 +16,7 @@ This project seeks to visualize food access across higher education institutions
 
 By creating an interactive web page for spatial analysis, this project utilizes the user-friendly R-language to present the current food landscape through the lens of students in higher education, an often-overlooked demographic in local health and nutrition policies.
 
-## Why understand food access for college students?
+## Why understand food access for college students? 
 
 [As of 2024, 12.5% of Erie County residents face food insecurity, with approximately 63% of those residents falling below the threshold to be SNAP-eligible. An increase of 1.1% since 2019, the county is experiencing an annual food budget shortfall of approximately $92 million, leading to a significant increase in food prices and taxes on food and beverages](https://map.feedingamerica.org/county/2019/overall/new-york/county/erie). Research indicates that although food insecurity across all demographics is an increasing concern and must be understood at an individual level, broad categorizations of these groups increase invisibility of already vulnerable populations. [For instance, in 2020, 19 – 56% of students reported being food insecure on college campuses, four times more than the national average, and their prevalence depending on campus location and related factors](https://doi.org/10.3390/ijerph20105884). 
 
