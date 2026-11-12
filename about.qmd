@@ -2,16 +2,16 @@
 title: "About this site"
 ---
 
-This interactive dashboard contains information about food access for higher educational institutions in Erie County, NY.
+This interactive dashboard contains information about food access for higher education institutions in Erie County, NY.
 
 ::: {.callout-note collapse="true" icon=false title="Note on AI use"}
 Although this project does not include components of AI data outputs, some code chunks were created with the "help" of Perplexity AI. 
 
-Even though I personally do not encourage using AI in your daily tasks and refrain from using it in my daily life, I used Perplexity AI as a learning tool and as a testing ground to experiment some of the ideas I have for this project as an ultimate beginner.
+Even though I personally do not encourage using AI in your daily tasks and refrain from using it in my daily life, I used Perplexity AI as a learning tool and as a testing ground to experiment with some of the ideas I have for this project as a complete beginner.
 
-Any output was triple checked from existing public resources like [R-Bloggers](https://www.r-bloggers.com/), [Stack Overflow](https://stackoverflow.com/), [RStudio Community Forum](https://forum.posit.co/), [rOpenSci](https://ropensci.org/), and [RProject subreddit](https://www.reddit.com/r/RProject/). For visual display references, I used [Quarto's official guide](https://quarto.org/docs/guide/).
+Any output was checked against existing public resources like [R-Bloggers](https://www.r-bloggers.com/), [Stack Overflow](https://stackoverflow.com/), [Posit Community](https://forum.posit.co/), [rOpenSci](https://ropensci.org/), and [RProject subreddit](https://www.reddit.com/r/RProject/). For visual display references, I used [Quarto's official guide](https://quarto.org/docs/guide/).
 
-If you like any aspect of this project, I would highly recommend triple checking my data and resources before incorporating them in yours. 
+If you like any aspect of this project, I would highly recommend triple checking my data and resources before incorporating them into your own project. 
 
 Thank you!
 :::
@@ -20,7 +20,7 @@ Thank you!
 
 {{< include _includes/_institution_addresses.md >}}
 
-# Materials and methods
+## Materials and methods
 
 \[\~ 200 words\]
 

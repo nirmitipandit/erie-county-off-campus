@@ -20,33 +20,92 @@ By creating an interactive web page for spatial analysis, this project utilizes 
 
 [As of 2024, 12.5% of Erie County residents face food insecurity, with approximately 63% of those residents falling below the threshold to be SNAP-eligible. An increase of 1.1% since 2019, the county is experiencing an annual food budget shortfall of approximately $92 million, leading to a significant increase in food prices and taxes on food and beverages](https://map.feedingamerica.org/county/2019/overall/new-york/county/erie). Research indicates that although food insecurity across all demographics is an increasing concern and must be understood at an individual level, broad categorizations of these groups increase invisibility of already vulnerable populations. [For instance, in 2020, 19 – 56% of students reported being food insecure on college campuses, four times more than the national average, and their prevalence depending on campus location and related factors](https://doi.org/10.3390/ijerph20105884). 
 
-Demographic selection is not the only variable that lacks comprehensive analysis. [Studies show that existing research trends surrounding food and nutritional access often overlook all five dimensions from context-specific methodologies](https://doi.org/10.1016/j.neb.2022.02.017). This dearth in frame of reference, when handpicking only few aspects of the food environment as the central theses, leads to further disparities in how we evaluate the perceptions of healthy, nutritious food available to individuals in a community.
+Demographic selection is not the only variable that lacks comprehensive analysis. [Studies show that existing research trends surrounding food and nutritional access often overlook all five dimensions from context-specific methodologies](https://doi.org/10.1016/j.jneb.2022.02.017). This dearth in frame of reference, when handpicking only few aspects of the food environment as the central theses, leads to further disparities in how we evaluate the perceptions of healthy, nutritious food available to individuals in a community.
 
 ## Whose food access are we looking at?
 
 ```{r}
 #| label: institution-map
-#| title: "Institution map"
 #| echo: false
 #| warning: false
 #| message: false
-#| padding: 0px
 
 library(leaflet)
 
+input_path <- file.path(
+  "data",
+  "processed",
+  "eriecounty_institutions_geocoded.csv"
+)
+
+if (!file.exists(input_path)) {
+  stop(
+    "Geocoded institution CSV not found. ",
+    "Run geocode_institutions.r first.",
+    call. = FALSE
+  )
+}
+
 institutions <- read.csv(
-  "data/processed/eriecounty_institutions_geocoded.csv",
+  input_path,
   stringsAsFactors = FALSE,
   fileEncoding = "UTF-8"
 )
 
+required_columns <- c(
+  "institution",
+  "address",
+  "latitude",
+  "longitude"
+)
+
+missing_columns <- setdiff(
+  required_columns,
+  names(institutions)
+)
+
+if (length(missing_columns) > 0L) {
+  stop(
+    "Missing required columns: ",
+    paste(missing_columns, collapse = ", "),
+    call. = FALSE
+  )
+}
+
+institutions$latitude <- suppressWarnings(
+  as.numeric(
+    trimws(as.character(institutions$latitude))
+  )
+)
+
+institutions$longitude <- suppressWarnings(
+  as.numeric(
+    trimws(as.character(institutions$longitude))
+  )
+)
+
+valid_coordinates <- with(
+  institutions,
+  is.finite(latitude) &
+    is.finite(longitude) &
+    latitude >= -90 &
+    latitude <= 90 &
+    longitude >= -180 &
+    longitude <= 180
+)
+
 institutions <- institutions[
-  is.finite(institutions$latitude) &
-    is.finite(institutions$longitude),
+  valid_coordinates,
+  ,
+  drop = FALSE
 ]
 
 if (nrow(institutions) == 0L) {
-  stop("No usable coordinates found. Run geocode_institutions.r first.")
+  stop(
+    "No usable coordinates found. ",
+    "Run geocode_institutions.r first.",
+    call. = FALSE
+  )
 }
 
 leaflet(institutions) |>
@@ -63,10 +122,10 @@ leaflet(institutions) |>
     )
   ) |>
   fitBounds(
-    lng1 = min(institutions$longitude) - 0.01,
-    lat1 = min(institutions$latitude) - 0.01,
-    lng2 = max(institutions$longitude) + 0.01,
-    lat2 = max(institutions$latitude) + 0.01
+    lng1 = max(-180, min(institutions$longitude) - 0.01),
+    lat1 = max(-90, min(institutions$latitude) - 0.01),
+    lng2 = min(180, max(institutions$longitude) + 0.01),
+    lat2 = min(90, max(institutions$latitude) + 0.01)
   )
 ```
 

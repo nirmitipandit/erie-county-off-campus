@@ -1,30 +1,33 @@
 ---
 title: "Food Access Dashboard"
-output: 
-  flexdashboard::flex_dashboard:
-    storyboard: true
-    social: menu
-    source: embed
-    engine: knitr
-    
+format:
+  html:
+    embed-resources: true
+engine: knitr
 execute:
   echo: false
   warning: false
   message: false
 ---
 
-```{r setup, include=FALSE}
-library(flexdashboard)
+```{r}
+#| label: setup
+#| include: false
+
+library(leaflet)
+library(dygraphs)
+library(ggplot2)
+library(plotly)
 ```
 
 This interactive dashboard displays results of the food access examination for thirteen higher educational institutions in Erie County. Click the toggle below for quick access or keep scrolling for a full view of the results.
 
 ::: {.callout-note collapse="true" icon=false title="Quick Access to Results"}
 
-* [Retailer density & distance from institutions](dashboard.qmd#map-density-distance)
-* [Number of retailers accepting SNAP/EBT or other voucher programs](dashboard.qmd#dygraph-vouchers)
-* [Average store operating hours throughout the week](dashboard.qmd#plot-storehours)
-* [Customer feedback & score of available retailers](dashboard.qmd#valuebox-feedback)
+* [Retailer density & distance from institutions](#map-density-distance)
+* [Number of retailers accepting SNAP/EBT or other voucher programs](#dygraph-vouchers)
+* [Average store operating hours throughout the week](#plot-storehours)
+* [Customer feedback & score of available retailers](#valuebox-feedback)
 
 :::
 
@@ -32,13 +35,9 @@ This interactive dashboard displays results of the food access examination for t
 
 ```{r}
 #| label: institution-map
-#| title: "Institution map"
 #| echo: false
 #| warning: false
 #| message: false
-#| padding: 0px
-
-library(leaflet)
 
 institutions <- read.csv(
   "data/processed/eriecounty_institutions_geocoded.csv",
@@ -46,13 +45,59 @@ institutions <- read.csv(
   fileEncoding = "UTF-8"
 )
 
+required_columns <- c(
+  "institution",
+  "address",
+  "latitude",
+  "longitude"
+)
+
+missing_columns <- setdiff(
+  required_columns,
+  names(institutions)
+)
+
+if (length(missing_columns) > 0L) {
+  stop(
+    "The institution CSV is missing these required columns: ",
+    paste(missing_columns, collapse = ", "),
+    call. = FALSE
+  )
+}
+
+institutions$latitude <- suppressWarnings(
+  as.numeric(
+    trimws(as.character(institutions$latitude))
+  )
+)
+
+institutions$longitude <- suppressWarnings(
+  as.numeric(
+    trimws(as.character(institutions$longitude))
+  )
+)
+
+valid_coordinates <- with(
+  institutions,
+  is.finite(latitude) &
+    is.finite(longitude) &
+    latitude >= -90 &
+    latitude <= 90 &
+    longitude >= -180 &
+    longitude <= 180
+)
+
 institutions <- institutions[
-  is.finite(institutions$latitude) &
-    is.finite(institutions$longitude),
+  valid_coordinates,
+  ,
+  drop = FALSE
 ]
 
 if (nrow(institutions) == 0L) {
-  stop("No usable coordinates found. Run geocode_institutions.r first.")
+  stop(
+    "No usable coordinates found. Run geocode_institutions.r first.",
+    call. = FALSE
+  )
 }
 
 leaflet(institutions) |>
@@ -69,10 +114,10 @@ leaflet(institutions) |>
     )
   ) |>
   fitBounds(
-    lng1 = min(institutions$longitude) - 0.01,
-    lat1 = min(institutions$latitude) - 0.01,
-    lng2 = max(institutions$longitude) + 0.01,
-    lat2 = max(institutions$latitude) + 0.01
+    lng1 = max(-180, min(institutions$longitude) - 0.01),
+    lat1 = max(-90, min(institutions$latitude) - 0.01),
+    lng2 = min(180, max(institutions$longitude) + 0.01),
+    lat2 = min(90, max(institutions$latitude) + 0.01)
   )
 ```
 
@@ -82,14 +127,36 @@ This *placeholder* map shows the number of retailers around higher education ins
 ### Number of retailers accepting SNAP/EBT or other voucher programs. {#dygraph-vouchers}
 
 ```{r}
-library(dygraphs)
-lungDeaths <- cbind(mdeaths, fdeaths)
-dygraph(lungDeaths, main = "Deaths from Lung Diseases in the UK") %>%
-  dySeries("mdeaths", label = "Male") %>%
-  dySeries("fdeaths", label = "Female") %>%
-  dyOptions(stackedGraph = TRUE) %>%
-  dyRangeSelector(height = 20) %>% 
-  dyRangeSelector()
+#| label: voucher-chart
+
+lungDeaths <- cbind(
+  datasets::mdeaths,
+  datasets::fdeaths
+)
+
+colnames(lungDeaths) <- c(
+  "mdeaths",
+  "fdeaths"
+)
+
+dygraph(
+  lungDeaths,
+  main = "Deaths from Lung Diseases in the UK"
+) |>
+  dySeries(
+    "mdeaths",
+    label = "Male"
+  ) |>
+  dySeries(
+    "fdeaths",
+    label = "Female"
+  ) |>
+  dyOptions(
+    stackedGraph = TRUE
+  ) |>
+  dyRangeSelector(
+    height = 20
+  )
 ```
 
 ***
@@ -99,9 +166,19 @@ This *placeholder* graph shows the affordability of retailers over time by displ
 ### Average store operating hours throughout the week. {#plot-storehours}
 
 ```{r}
-library(plotly)
-p <- ggplot(data = diamonds, aes(x = cut, fill = clarity)) +
-            geom_bar(position = "dodge")
+#| label: store-hours-chart
+
+p <- ggplot(
+  data = diamonds,
+  aes(
+    x = cut,
+    fill = clarity
+  )
+) +
+  geom_bar(
+    position = "dodge"
+  )
+
 ggplotly(p)
 ```
 
@@ -111,6 +188,7 @@ This *placeholder* graph shows you the average operating hours of store througho
 ### Customer feedback and food access score(s). {#valuebox-feedback}
 
 ```{r}
+#| label: feedback-button
 #| echo: false
 #| eval: true
 #| include: true
@@ -137,12 +215,18 @@ popup_message <- sprintf(
 
 # Safely format the message for an HTML button.
 js_message <- as.character(
-  jsonlite::toJSON(popup_message, auto_unbox = TRUE)
+  jsonlite::toJSON(
+    popup_message,
+    auto_unbox = TRUE
+  )
 )
 
 cat(
   '<button type="button" class="btn btn-primary" onclick="alert(',
-  htmltools::htmlEscape(js_message, attribute = TRUE),
+  htmltools::htmlEscape(
+    js_message,
+    attribute = TRUE
+  ),
   ')">Show average food access score</button>',
   sep = ""
 )
@@ -158,12 +242,3 @@ Click the button to view the placeholder result.
 ***
 **Hear what other people have to say!**
 
-```{=html}
-<iframe
- src= "https://www.yelp.com/"
- width="100%"
- height="600px"
- style="border: 1px solide #ddd; border-radius: 4px;">
-
-</iframe>
-```
