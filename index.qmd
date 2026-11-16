@@ -30,7 +30,7 @@ Demographic selection is not the only variable that lacks comprehensive analysis
 #| warning: false
 #| message: false
 
-library(leaflet)
+library(leaflet) 
 
 input_path <- file.path(
   "data",
@@ -108,7 +108,7 @@ if (nrow(institutions) == 0L) {
   )
 }
 
-leaflet(institutions) |>
+leaflet(institutions) |> 
   addTiles() |>
   addMarkers(
     lng = ~longitude,
